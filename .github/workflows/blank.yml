@@ -1,0 +1,21 @@
+name: Release builder
+run-name: Build ${{ github.ref_name }}
+
+on:
+  workflow_dispatch:
+  
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Get iperf3 source
+      run: git clone --depth 1 --branch 3.14 https://github.com/esnet/iperf.git
+
+    - name: Get iperf3 source
+      run: ls -la
