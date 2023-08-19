@@ -40,7 +40,7 @@ jobs:
         export LD=/usr/bin/llvm-ld-16
         export RANLIB=/usr/bin/llvm-ranlib-16
         export STRIP=/usr/bin/llvm-strip-16
-        ./configure --enable-static-bin --host=x86_64-pc-windows-gnu
+        ./configure --enable-static-bin --target=x86_64-pc-windows-gnu
 
     - name: make iperf3
       run: cd iperf && make
