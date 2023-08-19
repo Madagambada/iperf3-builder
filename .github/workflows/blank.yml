@@ -44,3 +44,13 @@ jobs:
 
     - name: install iperf3
       run: cd iperf && sudo make install
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        name: ${{ github.ref_name }}
+        generate_release_notes: true
+        tag_name: ${{ github.ref }}
+        files: /usr/local/bin/iperf3 
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
