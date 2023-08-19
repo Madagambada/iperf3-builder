@@ -22,6 +22,14 @@ jobs:
         wget https://apt.llvm.org/llvm.sh
         chmod +x llvm.sh
         sudo ./llvm.sh 16
+    
+    - name: Get iperf3 source
+      run: git clone --depth 1 --branch 3.14 https://github.com/esnet/iperf.git
+
+
+    - name: configure iperf3
+      run: |
+        cd iperf 
         export AR=/usr/bin/llvm-ar-16
         export AS=/usr/bin/llvm-as-16
         export CC=/usr/bin/clang-16
@@ -29,15 +37,10 @@ jobs:
         export LD=/usr/bin/llvm-ld-16
         export RANLIB=/usr/bin/llvm-ranlib-16
         export STRIP=/usr/bin/llvm-strip-16
-    
-    - name: Get iperf3 source
-      run: git clone --depth 1 --branch 3.14 https://github.com/esnet/iperf.git
-
-    - name: configure iperf3
-      run: cd iperf && ./configure --enable-static-bin
+        ./configure --enable-static-bin
 
     - name: make iperf3
-      run: make
+      run: cd iperf && make
 
     - name: install iperf3
-      run: sudo make install
+      run: cd iperf && sudo make install
